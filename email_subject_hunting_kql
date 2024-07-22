@@ -1,4 +1,4 @@
-//The phishing subject mostly found in the realword
+//common phishing subjects encountered in the real world
 let phishingSubjects = @"(?i)(urgent|action required|order shipped|order confirmation required|amazon account needs attention|important notice from your bank|"
                         @"you've won a prize|compromised|immediate action required|verify your account|locked if you don't respond|update your payment|"
                         @"important: your account|invoice overdue|payment failed|recent payment declined|refund notification|new invoice from your vendor|"
