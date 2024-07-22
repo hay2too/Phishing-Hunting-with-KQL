@@ -1,0 +1,31 @@
+//The phishing subject mostly found in the realword
+let phishingSubjects = @"(?i)(urgent|action required|order shipped|order confirmation required|amazon account needs attention|important notice from your bank|"
+                        @"you've won a prize|compromised|immediate action required|verify your account|locked if you don't respond|update your payment|"
+                        @"important: your account|invoice overdue|payment failed|recent payment declined|refund notification|new invoice from your vendor|"
+                        @"password expired|security alert|password reset required|unusual login attempt|account hacked|document is ready for signature|e-statement|"
+                        @"attached file to docusign|secure document delivery|confidential document attached|banking alert|"
+                        @"new message regarding your bank account|bank account details verification|bank account statement available|package delivery delayed|"
+                        @"thank you for your purchase|congratulations: you've been selected|exclusive offer|final notice: claim your reward|account update required|"
+                        @"survey invitation: win a gift card|payment required|payment invoice attached|account disabled|action required to verify your account|"
+                        @"final warning|your account has been suspended|billing error|confirm your email address|delivery attempt failed|urgent security alert|"
+                        @"your order has been processed|verify your identity|we detected unusual activity|please confirm your account information|new message from HR|"
+                        @"you have a new voicemail|your subscription is expiring|important security notice|reset your password now|"
+                        @"your account statement is available|alert: unusual login attempt|important: update your information|account verification needed|"
+                        @"important: respond immediately|new important message|urgent: account access issue|security notification|notification: account restriction|"
+                        @"important update about your account|Microsoft account unusual sign-in activity|Microsoft account security code|"
+                        @"Microsoft password reset|Microsoft account verification|unusual sign-in activity detected|your payment information needs updating|"
+                        @"important notice from your bank|your bank account has been locked|unauthorized transaction detected|important: account suspended|"
+                        @"verify your banking information|security alert: account compromise|update your banking details|alert: account restriction|"
+                        @"online banking alert: your account has been suspended|new secure message from your bank|"
+                        @"bank account locked: action required|your bank account requires immediate attention|suspicious activity on your bank account|"
+                        @"account statement ready for review|payment due notice|action required to avoid account suspension|"
+                        @"Microsoft Teams: missed call notification|Microsoft Teams: new message|Microsoft 365: subscription renewal|"
+                        @"urgent: verify your Microsoft account|Microsoft Office 365: password change request|outlook: new login detected|"
+                        @"office 365: verify your account|action required: microsoft account security alert|Microsoft billing update required|"
+                        @"password reset for Microsoft services|urgent: confirm your Microsoft account details)";
+
+EmailEvents
+| where Timestamp > ago(7d)
+| where SenderFromDomain !in ("yourtrusted.domain")
+| where Subject matches regex phishingSubjects
+| project Timestamp, SenderFromAddress, RecipientEmailAddress, Subject, DeliveryAction
