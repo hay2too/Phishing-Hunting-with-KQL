@@ -23,7 +23,6 @@ let phishingSubjects = @"(?i)(urgent|action required|order shipped|order confirm
                         @"urgent: verify your Microsoft account|Microsoft Office 365: password change request|outlook: new login detected|"
                         @"office 365: verify your account|action required: microsoft account security alert|Microsoft billing update required|"
                         @"password reset for Microsoft services|urgent: confirm your Microsoft account details)";
-
 EmailEvents
 | where Timestamp > ago(7d)
 | where SenderFromDomain !in ("yourtrusted.domain")
