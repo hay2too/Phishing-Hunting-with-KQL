@@ -25,6 +25,6 @@ let phishingSubjects = @"(?i)(urgent|action required|order shipped|order confirm
                         @"password reset for Microsoft services|urgent: confirm your Microsoft account details)";
 EmailEvents
 | where Timestamp > ago(7d)
-| where SenderFromDomain !in ("yourtrusted.domain")
+| where SenderFromDomain !in ("yourtrusted.domain") //exclude your trusted domain
 | where Subject matches regex phishingSubjects
 | project Timestamp, SenderFromAddress, RecipientEmailAddress, Subject, DeliveryAction
